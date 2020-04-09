@@ -3,7 +3,7 @@ package pl.coderslab.warsztat3krkjeew04.dao;
 
 
 import pl.coderslab.warsztat3krkjeew04.model.User;
-import pl.coderslab.warsztat3krkjeew04.util.DbUtils;
+import pl.coderslab.warsztat3krkjeew04.util.DbUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class UserDao {
     private static final String FIND_ALL_USERS_QUERY = "SELECT * FROM users;";
 
     public User create(User user) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUsername());
@@ -38,7 +38,7 @@ public class UserDao {
     }
 
     public User read(int id) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(READ_USER_QUERY);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -58,7 +58,7 @@ public class UserDao {
     }
 
     public void update(User user) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY);
             statement.setInt(5, user.getId());
             statement.setString(1, user.getUsername());
@@ -72,7 +72,7 @@ public class UserDao {
     }
 
     public void delete(int id) {
-        try (Connection connection = DbUtils.getConnection();
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_USER_QUERY)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -83,7 +83,7 @@ public class UserDao {
 
     public List<User> findAll() {
         List<User> userList = new ArrayList<>();
-        try (Connection connection = DbUtils.getConnection();
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
@@ -103,7 +103,7 @@ public class UserDao {
 
     public List<User> findAllByGroupId(int groupId) {
         List<User> userArrayList = new ArrayList<>();
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS_BY_GROUP_ID_QUERY);
             statement.setInt(1, groupId);
             ResultSet resultSet = statement.executeQuery();

@@ -3,7 +3,7 @@ package pl.coderslab.warsztat3krkjeew04.dao;
 
 
 import pl.coderslab.warsztat3krkjeew04.model.UsersGroup;
-import pl.coderslab.warsztat3krkjeew04.util.DbUtils;
+import pl.coderslab.warsztat3krkjeew04.util.DbUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class UsersGroupDao {
     private static final String FIND_ALL_USERS_GROUP_QUERY = "SELECT * FROM users_group;";
 
     public UsersGroup create(UsersGroup usersGroup) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE_USERS_GROUP_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, usersGroup.getName());
@@ -34,7 +34,7 @@ public class UsersGroupDao {
     }
 
     public UsersGroup read(int id) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(READ_USERS_GROUP_QUERY);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -51,7 +51,7 @@ public class UsersGroupDao {
     }
 
     public void update(UsersGroup users) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_GROUP_QUERY);
             statement.setInt(2, users.getId());
             statement.setString(1, users.getName());
@@ -62,7 +62,7 @@ public class UsersGroupDao {
     }
 
     public void delete(int id) {
-        try (Connection connection = DbUtils.getConnection();
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_USERS_GROUP_QUERY)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -73,7 +73,7 @@ public class UsersGroupDao {
 
     public List<UsersGroup> findAll() {
         List<UsersGroup> usersGroups = new ArrayList<>();
-        try (Connection connection = DbUtils.getConnection();
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS_GROUP_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

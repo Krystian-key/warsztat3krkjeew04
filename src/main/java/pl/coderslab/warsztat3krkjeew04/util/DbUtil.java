@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DbUtils {
+public class DbUtil {
     private static DataSource dataSource;
 
     public static Connection getConnection() throws SQLException {

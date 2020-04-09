@@ -1,9 +1,8 @@
 package pl.coderslab.warsztat3krkjeew04.dao;
 
 
-
 import pl.coderslab.warsztat3krkjeew04.model.Solution;
-import pl.coderslab.warsztat3krkjeew04.util.DbUtils;
+import pl.coderslab.warsztat3krkjeew04.util.DbUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +16,37 @@ public class SolutionDao {
     private static final String UPDATE_SOLUTION_QUERY = "UPDATE solutions SET  updated= ?, description = ? where id = ?;";
     private static final String DELETE_SOLUTION_QUERY = "DELETE FROM solutions WHERE id = ?;";
     private static final String FIND_ALL_SOLUTIONS_QUERY = "SELECT * FROM solutions;";
+    private String READ_RECENT_QUERY = "SELECT id, created, updated, description, exercise_id, users_id FROM solutions ORDER BY updated LIMIT ?;";
+
+    public List<Solution> findRecent(int howMany) {
+        List<Solution> result = new ArrayList<>();
+
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(READ_RECENT_QUERY);
+            statement.setInt(1, howMany);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Solution sol = new Solution();
+                sol.setId(resultSet.getInt("id"));
+                if (resultSet.getTimestamp("updated") != null) {
+                    sol.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                }
+                sol.setDescription(resultSet.getString("description"));
+                sol.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
+                sol.setExerciseId(resultSet.getInt("exercise_id"));
+                sol.setUsersId(resultSet.getInt("users_id"));
+
+                result.add(sol);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
     public Solution create(Solution solution) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE_SOLUTION_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, solution.getCreated().toString());
@@ -38,7 +65,7 @@ public class SolutionDao {
     }
 
     public Solution read(int id) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(READ_SOLUTION_QUERY);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -46,7 +73,9 @@ public class SolutionDao {
                 Solution solution = new Solution();
                 solution.setId(resultSet.getInt("id"));
                 solution.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                if (resultSet.getTimestamp("updated") != null) {
+                    solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                }
                 solution.setDescription(resultSet.getString("description"));
                 solution.setExerciseId(resultSet.getInt("exercise_id"));
                 solution.setUsersId(resultSet.getInt("users_id"));
@@ -59,7 +88,7 @@ public class SolutionDao {
     }
 
     public void update(Solution solution) {
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_SOLUTION_QUERY);
             statement.setInt(3, solution.getId());
             statement.setString(1, solution.getUpdated().toString());
@@ -71,7 +100,7 @@ public class SolutionDao {
     }
 
     public void delete(int id) {
-        try (Connection connection = DbUtils.getConnection();
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_SOLUTION_QUERY)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -82,14 +111,16 @@ public class SolutionDao {
 
     public List<Solution> findAll() {
         List<Solution> solutionArrayList = new ArrayList<>();
-        try (Connection connection = DbUtils.getConnection();
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_SOLUTIONS_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 Solution solution = new Solution();
                 solution.setId(resultSet.getInt("id"));
                 solution.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                if (resultSet.getTimestamp("updated") != null) {
+                    solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                }
                 solution.setDescription(resultSet.getString("description"));
                 solution.setId(resultSet.getInt("exercise_id"));
                 solution.setId(resultSet.getInt("users_id"));
@@ -103,7 +134,7 @@ public class SolutionDao {
 
     public List<Solution> findAllByUserId(int userId) {
         List<Solution> solutionList = new ArrayList<>();
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(FIND_ALL_SOLUTIONS_BY_USER_ID_QUERY);
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -111,7 +142,7 @@ public class SolutionDao {
                 Solution solution = new Solution();
                 solution.setId(resultSet.getInt("id"));
                 solution.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                if(resultSet.getTimestamp("updated")!=null){
+                if (resultSet.getTimestamp("updated") != null) {
                     solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
                 }
                 solution.setDescription(resultSet.getString("description"));
@@ -127,7 +158,7 @@ public class SolutionDao {
 
     public List<Solution> findAllByExerciseId(int exerciseId) {
         List<Solution> solutionList = new ArrayList<>();
-        try (Connection connection = DbUtils.getConnection()) {
+        try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(FIND_ALL_SOLUTIONS_BY_EXERCISE_ID_QUERY);
             statement.setInt(1, exerciseId);
             ResultSet resultSet = statement.executeQuery();
