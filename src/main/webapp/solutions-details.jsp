@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <%@include file="header.jsp"%>
@@ -14,11 +15,11 @@
 </head>
 <body>
 <div>
-    <table>
+    <table class="mystyle">
         <thead>
         <tr>
-            <td>Author:</td>
-            <td>Created:</td>
+            <td>Id:</td>
+            <td>Commissioned to do:</td>
             <td>Details:</td>
         </tr>
         </thead>

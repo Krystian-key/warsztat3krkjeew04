@@ -16,6 +16,7 @@ public class UserDao {
     private static final String UPDATE_USER_QUERY = "UPDATE users SET username = ?, email = ?, password = ?,user_group_id = ?  where id = ?;";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE id = ?;";
     private static final String FIND_ALL_USERS_QUERY = "SELECT * FROM users;";
+    private static final String SELECT_ALL_USERS_JOIN_BY_GROUP = "SELECT users.id, users.username, users.email, users_group.name as name FROM users JOIN users_group on users.user_group_id = users_group.id;";
 
     public User create(User user) {
         try (Connection connection = DbUtil.getConnection()) {
@@ -93,6 +94,25 @@ public class UserDao {
                 userToAdd.setEmail(resultSet.getString("email"));
                 userToAdd.setUserGroupId(resultSet.getInt("user_group_id"));
                 userToAdd.setPasswordString(resultSet.getString("password"));
+                userList.add(userToAdd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    public List<User> findAllUsersFromUsersGroup() {
+        List<User> userList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_JOIN_BY_GROUP);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                User userToAdd = new User();
+                userToAdd.setId(resultSet.getInt("id"));
+                userToAdd.setUsername(resultSet.getString("username"));
+                userToAdd.setEmail(resultSet.getString("email"));
+                userToAdd.setUserGroupId(resultSet.getInt("user_group_id"));
                 userList.add(userToAdd);
             }
         } catch (SQLException e) {

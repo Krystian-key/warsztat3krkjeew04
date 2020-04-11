@@ -8,24 +8,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
     <title>Title</title>
 </head>
 <body>
-<p>
-<ul class="nav nounderline text-uppercase">
+
+<%--<ul class="nav nounderline text-uppercase">
     <li class="nav-item ml-4">
         <a class="nav-link color-header" href="${pageContext.request.contextPath}/">Home</a>
     </li>
     <li class="nav-item ml-4">
-        <a class="nav-link color-header" href="${pageContext.request.contextPath}/usersGroups">Users Group</a>
+        <a class="nav-link color-header" href="${pageContext.request.contextPath}/usersGroups">Groups</a>
     </li>
     <li class="nav-item ml-4">
-        <a class="nav-link" href="about">Admin Panel</a>
+        <a class="nav-link color-header" href="${pageContext.request.contextPath}/panelAdmin">Admin</a>
     </li>
     <li class="nav-item ml-4">
         <a class="nav-link disabled" href="contact">Contact</a>
     </li>
-</ul>
-</p>
+</ul>--%>
+<div id='cssmenu'>
+    <ul>
+        <li class='active'><a href='${pageContext.request.contextPath}/'><span>Home</span></a></li>
+        <li><a href='${pageContext.request.contextPath}/usersGroups'><span>Groups</span></a></li>
+        <li><a href='${pageContext.request.contextPath}/panelAdmin'><span>Admin</span></a></li>
+        <li class='last'><a href='#'><span>Contact</span></a></li>
+    </ul>
+</div>
 </body>
 </html>

@@ -9,6 +9,8 @@ public class Solution {
     private String description;
     private int exerciseId;
     private int usersId;
+    private String exercise;
+    private String user;
 
     public Solution(int id, LocalDateTime created, LocalDateTime updated, String description, int exerciseId, int usersId) {
         this.id = id;
@@ -17,6 +19,27 @@ public class Solution {
         this.description = description;
         this.exerciseId = exerciseId;
         this.usersId= usersId;
+    }
+
+    public Solution(String exercise, String user) {
+        this.exercise = exercise;
+        this.user = user;
+    }
+
+    public String getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(String exercise) {
+        this.exercise = exercise;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Solution() {
@@ -79,6 +102,8 @@ public class Solution {
                 ", description='" + description + '\'' +
                 ", exerciseId=" + exerciseId +
                 ", usersId=" + usersId +
+                ", exercise='" + exercise + '\'' +
+                ", user='" + user + '\'' +
                 '}';
     }
 }

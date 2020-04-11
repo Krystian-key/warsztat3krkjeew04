@@ -16,11 +16,12 @@ public class SolutionDao {
     private static final String UPDATE_SOLUTION_QUERY = "UPDATE solutions SET  updated= ?, description = ? where id = ?;";
     private static final String DELETE_SOLUTION_QUERY = "DELETE FROM solutions WHERE id = ?;";
     private static final String FIND_ALL_SOLUTIONS_QUERY = "SELECT * FROM solutions;";
-    private String READ_RECENT_QUERY = "SELECT id, created, updated, description, exercise_id, users_id FROM solutions ORDER BY updated LIMIT ?;";
+    private String READ_RECENT_QUERY = "SELECT solutions.id, solutions.created, solutions.updated, solutions.description, exercises.title as exercise, users_id FROM solutions\n" +
+            "JOIN exercises ON solutions.exercise_id = exercises.id\n" +
+            "ORDER BY updated LIMIT ?;";
 
     public List<Solution> findRecent(int howMany) {
         List<Solution> result = new ArrayList<>();
-
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_RECENT_QUERY);
             statement.setInt(1, howMany);
@@ -33,8 +34,8 @@ public class SolutionDao {
                 }
                 sol.setDescription(resultSet.getString("description"));
                 sol.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                sol.setExerciseId(resultSet.getInt("exercise_id"));
                 sol.setUsersId(resultSet.getInt("users_id"));
+                sol.setExercise(resultSet.getString("exercise"));
 
                 result.add(sol);
             }

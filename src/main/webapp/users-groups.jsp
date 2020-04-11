@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <%@include file="header.jsp" %>
@@ -14,11 +15,11 @@
 </head>
 <body>
 <div>
-    <table>
+    <table class="mystyle">
         <thead>
         <tr>
-            <td>Groups Id:</td>
-            <td>Groups Name:</td>
+            <td>Group Id:</td>
+            <td>Group Name:</td>
             <td>Details:</td>
         </tr>
         </thead>
@@ -28,7 +29,7 @@
                 <td>${grouplist.id}</td>
                 <td>${grouplist.name}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/usersGroupsList?groupId=${grouplist.id}">list details</a>
+                    <a href="${pageContext.request.contextPath}/usersGroupsList?groupId=${grouplist.id}">details</a>
                 </td>
             </tr>
         </c:forEach>

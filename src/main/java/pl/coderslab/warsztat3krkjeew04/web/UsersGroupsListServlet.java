@@ -1,7 +1,9 @@
 package pl.coderslab.warsztat3krkjeew04.web;
 
+import pl.coderslab.warsztat3krkjeew04.dao.SolutionDao;
 import pl.coderslab.warsztat3krkjeew04.dao.UserDao;
 import pl.coderslab.warsztat3krkjeew04.dao.UsersGroupDao;
+import pl.coderslab.warsztat3krkjeew04.model.Solution;
 import pl.coderslab.warsztat3krkjeew04.model.User;
 import pl.coderslab.warsztat3krkjeew04.model.UsersGroup;
 
@@ -19,7 +21,7 @@ public class UsersGroupsListServlet extends HttpServlet {
         int solutionsId = Integer.parseInt(request.getParameter("groupId"));
         List<User> userList = new UserDao().findAllByGroupId(solutionsId);
         request.setAttribute("usersGroupList", userList);
-        request.getRequestDispatcher("/users-groups-list.jsp").forward(request,response);
+        request.getRequestDispatcher("/group-details.jsp").forward(request,response);
     }
 
     @Override

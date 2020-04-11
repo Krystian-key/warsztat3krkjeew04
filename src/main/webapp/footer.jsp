@@ -12,8 +12,10 @@
     <title>Title</title>
 </head>
 <body>
-<p>
-    Footer strony..
-</p>
+<div>
+    <table class="mystyle">
+        Stopka Informacyjna
+    </table>
+</div>
 </body>
 </html>

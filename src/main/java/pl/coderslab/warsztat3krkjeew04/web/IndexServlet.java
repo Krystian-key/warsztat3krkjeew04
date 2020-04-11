@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("")
-public class HomeServlet extends HttpServlet {
+public class IndexServlet extends HttpServlet {
     private int numberSolutions;
 
     @Override
@@ -28,7 +28,7 @@ public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SolutionDao solutionDao = new SolutionDao();
-        List<Solution> solutions = solutionDao.findRecent(2);
+        List<Solution> solutions = solutionDao.findRecent(3);
         request.setAttribute("recentSolutions", solutions);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }

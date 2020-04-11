@@ -9,6 +9,20 @@ public class User {
     private String password;
     private int userGroupId;
 
+    private String userGroup;
+
+    public String getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(String userGroup) {
+        this.userGroup = userGroup;
+    }
+
+    public User(String userGroup) {
+        this.userGroup = userGroup;
+    }
+
     public void setPassword(String password) {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
