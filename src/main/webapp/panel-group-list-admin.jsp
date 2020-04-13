@@ -21,6 +21,8 @@
             <td>Group Id:</td>
             <td>Group Name:</td>
             <td>Edit:</td>
+            <td>Add:</td>
+            <td>Delete:</td>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +31,7 @@
                 <td>${adminUsersGroup.id}</td>
                 <td>${adminUsersGroup.name}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/adminUsersGroup?Id=${adminUsersGroup.id}">Edit</a>
+                    <a href="${pageContext.request.contextPath}/EditGroupList?id=${adminUsersGroup.id}">Edit</a>
                 </td>
             </tr>
         </c:forEach>

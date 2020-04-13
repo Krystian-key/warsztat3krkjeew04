@@ -20,6 +20,6 @@ public class ShowGroupListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<UsersGroup> usersGroup = new UsersGroupDao().findAll();
         request.setAttribute("adminUsersGroup",usersGroup);
-        request.getRequestDispatcher("/show-group-list-admin.jsp").forward(request,response);
+        request.getRequestDispatcher("/panel-group-list-admin.jsp").forward(request,response);
     }
 }
