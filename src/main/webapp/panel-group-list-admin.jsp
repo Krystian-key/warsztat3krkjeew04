@@ -20,9 +20,9 @@
         <tr>
             <td>Group Id:</td>
             <td>Group Name:</td>
-            <td>Edit:</td>
-            <td>Add:</td>
-            <td>Delete:</td>
+            <td>
+                <a href="${pageContext.request.contextPath}/AddGroupList">Add</a>
+            </td>
         </tr>
         </thead>
         <tbody>

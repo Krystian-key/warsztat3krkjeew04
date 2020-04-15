@@ -9,26 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "EditGroupListServlet", urlPatterns ={"/EditGroupList"})
-public class EditGroupListServlet extends HttpServlet {
+@WebServlet(name = "AddGroupListServlet", urlPatterns ={"/AddGroupList"})
+public class AddGroupListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String groupName = request.getParameter("groupname");
+        String groupName = request.getParameter("groupName");
         UsersGroup usersGroup = new UsersGroup();
-        usersGroup.setId(id);
         usersGroup.setName(groupName);
-        UsersGroupDao usersGroupDao = new UsersGroupDao();
-        usersGroupDao.update(usersGroup);
+        new UsersGroupDao().create(usersGroup);
         response.sendRedirect(request.getContextPath()+"/ShowGroupList");
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        UsersGroup usersGroup = new UsersGroupDao().read(id);
-        request.setAttribute("usersGroup", usersGroup);
-        request.getRequestDispatcher("/edit-group-list-admin.jsp").forward(request,response);
+        request.getRequestDispatcher("/add-group-list-admin.jsp").forward(request,response);
     }
 }

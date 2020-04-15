@@ -21,9 +21,7 @@
             <td>Username:</td>
             <td>email:</td>
             <td>User group:</td>
-            <td>Edit:</td>
-            <td>Add:</td>
-            <td>Delete:</td>
+            <td><a href="${pageContext.request.contextPath}/AddUserList">Add</a></td>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +31,7 @@
                 <td>${ShowUsersList.email}</td>
                 <td>${ShowUsersList.userGroup}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/ShowUsersList${ShowUsersList.userName}">Edit</a>
+                    <a href="${pageContext.request.contextPath}/EditUserList?id=${ShowUsersList.id}">Edit</a>
                 </td>
             </tr>
         </c:forEach>

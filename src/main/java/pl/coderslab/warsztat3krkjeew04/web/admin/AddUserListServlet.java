@@ -12,30 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "EditGroupListServlet", urlPatterns ={"/EditUsersList"})
-public class EditUsersListServlet extends HttpServlet {
+@WebServlet(name = "AddUserListServlet", urlPatterns ={"/AddUserList"})
+public class AddUserListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String userName = request.getParameter("userName");
+        String userName = request.getParameter("Username");
         String email = request.getParameter("email");
-        int groupId = Integer.parseInt(request.getParameter("groupId"));
-
-        UserDao userDao = new UserDao();
+        int groupId = Integer.parseInt(request.getParameter("userGroupId"));
+        String password = request.getParameter("password");
         User user = new User();
-        user.setId(id);
         user.setUserName(userName);
         user.setEmail(email);
         user.setUserGroupId(groupId);
-        userDao.update(user);
-
-        response.sendRedirect(request.getContextPath()+"/");
-
+        user.setPassword(password);
+        user.setUserName(userName);
+        new UserDao().create(user);
+        response.sendRedirect(request.getContextPath()+"/ShowUsersList");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        User user = new UserDao().read(id);
-        request.setAttribute("user", user);
-        request.getRequestDispatcher("/edit-users-list-admin.jsp").forward(request,response);
+        request.getRequestDispatcher("/add-user-list-admin.jsp").forward(request,response);
     }
 }

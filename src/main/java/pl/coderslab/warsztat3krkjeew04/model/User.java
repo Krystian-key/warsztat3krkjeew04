@@ -9,6 +9,7 @@ public class User {
     private String password;
     private int userGroupId;
 
+
     private String userGroup;
 
     public String getUserGroup() {

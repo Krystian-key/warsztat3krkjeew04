@@ -13,7 +13,7 @@ public class UserDao {
     private static final String CREATE_USER_QUERY = "INSERT INTO users(username, email, password, user_group_id) VALUES (?, ?, ?,?);";
     private static final String READ_USER_QUERY = "SELECT * FROM users where id = ?;";
     private static final String FIND_ALL_USERS_BY_GROUP_ID_QUERY = "SELECT * FROM users where user_group_id = ?;";
-    private static final String UPDATE_USER_QUERY = "UPDATE users SET username = ?, email = ?, password = ?,user_group_id = ?  where id = ?;";
+    private static final String UPDATE_USER_QUERY = "UPDATE users SET username = ?, email = ?, user_group_id = ?  where id = ?;";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE id = ?;";
     private static final String FIND_ALL_USERS_QUERY = "SELECT users.id, users.username, users.email, users_group.name as name\n" +
             "FROM users\n" +
@@ -63,11 +63,10 @@ public class UserDao {
     public void update(User user) {
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY);
-            statement.setInt(5, user.getId());
+            statement.setInt(4, user.getId());
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setInt(4, user.getUserGroupId());
+            statement.setInt(3, user.getUserGroupId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -9,6 +9,7 @@ public class UsersGroup {
         this.name = name;
     }
 
+
     public UsersGroup() {
     }
 

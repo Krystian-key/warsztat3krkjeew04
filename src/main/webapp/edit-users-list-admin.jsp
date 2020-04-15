@@ -15,14 +15,17 @@
 </head>
 <body>
 <div>
-    <form action="${pageContext.request.contextPath}/EditUsersList?id=${requestScope.user.id}" method="post"></form>
+    <form action="${pageContext.request.contextPath}/EditUserList?id=${requestScope.user.id}" method="post">
     <div>
-        <label>Users List</label>
-        <input type="text" name="userName" value="${requestScope.user.userName}">
-        <input type="text" name="email" value="${requestScope.user.email}">
+        <label>user GroupId</label>
         <input type="text" name="groupId" value="${requestScope.user.userGroupId}">
+        <label>Username</label>
+        <input type="text" name="userName" value="${requestScope.user.userName}">
+        <label>User email</label>
+        <input type="text" name="email" value="${requestScope.user.email}">
         <button type="submit">Edit</button>
     </div>
+    </form>
 </div>
 </body>
 </html>

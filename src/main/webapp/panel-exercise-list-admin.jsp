@@ -23,7 +23,6 @@
             <td>Description:</td>
             <td>Edit:</td>
             <td>Add:</td>
-            <td>Delete:</td>
         </tr>
         </thead>
         <tbody>
