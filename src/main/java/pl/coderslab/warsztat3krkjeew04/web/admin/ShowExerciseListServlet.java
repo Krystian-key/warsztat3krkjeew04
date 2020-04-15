@@ -14,8 +14,6 @@ import java.util.List;
 @WebServlet(name = "ShowExerciseListServlet", urlPatterns ={"/ShowExerciseList"})
 public class ShowExerciseListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
