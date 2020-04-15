@@ -22,13 +22,13 @@
         <p>
         <ul class="nav nounderline text-uppercase">
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="${pageContext.request.contextPath}">Exercise list:</a>
+                <a class="nav-link color-header" href="${pageContext.request.contextPath}/ShowExerciseList">Exercise list:</a>
             </li>
             <li class="nav-item ml-4">
                 <a class="nav-link color-header" href="${pageContext.request.contextPath}/ShowGroupList">Users group list:</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="${pageContext.request.contextPath}">Users list:</a>
+                <a class="nav-link color-header" href="${pageContext.request.contextPath}/ShowUsersList">Users list:</a>
             </li>
         </ul>
         </p>

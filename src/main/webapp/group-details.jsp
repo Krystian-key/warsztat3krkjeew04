@@ -27,7 +27,7 @@
         <c:forEach var="grouplist" items="${requestScope.usersGroupList}" >
             <tr>
                 <td>${grouplist.id}</td>
-                <td>${grouplist.username}</td>
+                <td>${grouplist.userName}</td>
                 <td><a href="${pageContext.request.contextPath}/usersDate?id=${grouplist.id}">Details</a></td>
             </tr>
         </c:forEach>

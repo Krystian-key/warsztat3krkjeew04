@@ -15,14 +15,16 @@ public class UserDao {
     private static final String FIND_ALL_USERS_BY_GROUP_ID_QUERY = "SELECT * FROM users where user_group_id = ?;";
     private static final String UPDATE_USER_QUERY = "UPDATE users SET username = ?, email = ?, password = ?,user_group_id = ?  where id = ?;";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE id = ?;";
-    private static final String FIND_ALL_USERS_QUERY = "SELECT * FROM users;";
+    private static final String FIND_ALL_USERS_QUERY = "SELECT users.id, users.username, users.email, users_group.name as name\n" +
+            "FROM users\n" +
+            "    JOIN users_group on users.user_group_id = users_group.id;";
     private static final String SELECT_ALL_USERS_JOIN_BY_GROUP = "SELECT users.id, users.username, users.email, users_group.name as name FROM users JOIN users_group on users.user_group_id = users_group.id;";
 
     public User create(User user) {
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, user.getUsername());
+            statement.setString(1, user.getUserName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getUserGroupId());
@@ -46,7 +48,7 @@ public class UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
+                user.setUserName(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPasswordString(resultSet.getString("password"));
                 user.setUserGroupId(resultSet.getInt("user_group_id"));
@@ -62,7 +64,7 @@ public class UserDao {
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY);
             statement.setInt(5, user.getId());
-            statement.setString(1, user.getUsername());
+            statement.setString(1, user.getUserName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getUserGroupId());
@@ -90,10 +92,9 @@ public class UserDao {
             while (resultSet.next()) {
                 User userToAdd = new User();
                 userToAdd.setId(resultSet.getInt("id"));
-                userToAdd.setUsername(resultSet.getString("username"));
+                userToAdd.setUserName(resultSet.getString("username"));
                 userToAdd.setEmail(resultSet.getString("email"));
-                userToAdd.setUserGroupId(resultSet.getInt("user_group_id"));
-                userToAdd.setPasswordString(resultSet.getString("password"));
+                userToAdd.setUserGroup(resultSet.getString("name"));
                 userList.add(userToAdd);
             }
         } catch (SQLException e) {
@@ -110,7 +111,7 @@ public class UserDao {
             while (resultSet.next()) {
                 User userToAdd = new User();
                 userToAdd.setId(resultSet.getInt("id"));
-                userToAdd.setUsername(resultSet.getString("username"));
+                userToAdd.setUserName(resultSet.getString("username"));
                 userToAdd.setEmail(resultSet.getString("email"));
                 userToAdd.setUserGroupId(resultSet.getInt("user_group_id"));
                 userList.add(userToAdd);
@@ -130,7 +131,7 @@ public class UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
+                user.setUserName(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPasswordString(resultSet.getString("password"));
                 user.setUserGroupId(resultSet.getInt("user_group_id"));

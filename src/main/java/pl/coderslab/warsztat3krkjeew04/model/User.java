@@ -4,7 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private int id;
-    private String username;
+    private String userName;
     private String email;
     private String password;
     private int userGroupId;
@@ -31,16 +31,16 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String email, String password, int userGroupId) {
-        this.username = username;
+    public User(String userName, String email, String password, int userGroupId) {
+        this.userName = userName;
         this.email = email;
         setPassword(password);
         this.userGroupId = userGroupId;
     }
 
-    public User(int id, String username, String email, String password, int userGroupId) {
+    public User(int id, String userName, String email, String password, int userGroupId) {
         this.id = id;
-        this.username = username;
+        this.userName = userName;
         this.email = email;
         this.userGroupId = userGroupId;
         setPassword(password);
@@ -50,8 +50,8 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password) {
-        this.username = username;
+    public User(String userName, String email, String password) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
     }
@@ -60,7 +60,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userGroupId=" + userGroupId +
@@ -75,12 +75,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
