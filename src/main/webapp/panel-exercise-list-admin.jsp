@@ -21,8 +21,7 @@
             <td>Id:</td>
             <td>Title:</td>
             <td>Description:</td>
-            <td>Edit:</td>
-            <td>Add:</td>
+            <td><a href="${pageContext.request.contextPath}/AddExerciseList">Add</a></td>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +31,7 @@
                 <td>${exercisesList.title}</td>
                 <td>${exercisesList.description}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/EditGroupList?id=${adminUsersGroup.id}">Edit</a>
+                    <a href="${pageContext.request.contextPath}/EditExerciseList?id=${exercisesList.id}">Edit</a>
                 </td>
             </tr>
         </c:forEach>
