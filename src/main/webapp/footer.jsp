@@ -14,7 +14,7 @@
 <body>
 <div>
     <table class="mystyle">
-        Stopka Informacyjna
+
     </table>
 </div>
 </body>

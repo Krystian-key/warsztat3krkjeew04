@@ -1,11 +1,8 @@
 package pl.coderslab.warsztat3krkjeew04.web;
 
-import pl.coderslab.warsztat3krkjeew04.dao.SolutionDao;
 import pl.coderslab.warsztat3krkjeew04.dao.UsersGroupDao;
-import pl.coderslab.warsztat3krkjeew04.model.Solution;
 import pl.coderslab.warsztat3krkjeew04.model.UsersGroup;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

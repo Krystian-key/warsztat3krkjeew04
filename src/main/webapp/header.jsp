@@ -16,21 +16,6 @@
     <title>Title</title>
 </head>
 <body>
-
-<%--<ul class="nav nounderline text-uppercase">
-    <li class="nav-item ml-4">
-        <a class="nav-link color-header" href="${pageContext.request.contextPath}/">Home</a>
-    </li>
-    <li class="nav-item ml-4">
-        <a class="nav-link color-header" href="${pageContext.request.contextPath}/usersGroups">Groups</a>
-    </li>
-    <li class="nav-item ml-4">
-        <a class="nav-link color-header" href="${pageContext.request.contextPath}/panelAdmin">Admin</a>
-    </li>
-    <li class="nav-item ml-4">
-        <a class="nav-link disabled" href="contact">Contact</a>
-    </li>
-</ul>--%>
 <div id='cssmenu'>
     <ul>
         <li class='active'><a href='${pageContext.request.contextPath}/'><span>Home</span></a></li>
